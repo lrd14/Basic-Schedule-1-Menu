@@ -118,17 +118,20 @@ HRESULT __stdcall hkPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT 
 		{
 			ImGui::SameLine();
 
+			//tab 1 button
 			if (ImGui::Button(("Main"), ImVec2(215, 20))) {
 				globals::whichTab = 0;
 			}
 			ImGui::SameLine();
 
+			//tab 2 button
 			if (ImGui::Button(("Menu shit"), ImVec2(215, 20))) {
 				globals::whichTab = 1;
 			}
 
 			ImGui::Separator();
 
+			//tab 1
 			if (globals::whichTab == 0) {
 				ImGui::Text("!!MAKE SURE YOU ARE IN-GAME BEFORE YOU CLICK ANYTHING!!");
 				ImGui::Text("Cash stuff");
@@ -162,7 +165,7 @@ HRESULT __stdcall hkPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT 
 				ImGui::SameLine();
 
 				if (ImGui::Button(("Set deposit"))) {
-					*(float*)mem::FindAddress(moduleBase + 0x03849880, { 0xB8 , 0x0 , 0x48 , 0x978 }) = globals::atminput;
+					*(float*)mem::FindAddress(unityPlayer + 0x01D0FD58, { 0x8 , 0x18 , 0x438 , 0xF8 }) = globals::atminput;
 				}
 				if (ImGui::IsItemHovered(ImGuiHoveredFlags_AllowWhenDisabled)) {
 					ImGui::SetTooltip("This will set how much you will put into your bank from your cash. (This bypasses the $10000 limit)");
@@ -170,12 +173,14 @@ HRESULT __stdcall hkPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT 
 				ImGui::SameLine();
 
 				if (ImGui::Button(("Max"))) {
-					*(float*)mem::FindAddress(moduleBase + 0x03849880, { 0xB8 , 0x0 , 0x48 , 0x978 }) = *(float*)mem::FindAddress(moduleBase + 0x037976F8, { 0xB8 , 0x10 , 0x108 , 0x38 });
+					*(float*)mem::FindAddress(unityPlayer + 0x01D0FD58, { 0x8 , 0x18 , 0x438 , 0xF8 }) = *(float*)mem::FindAddress(moduleBase + 0x037976F8, { 0xB8 , 0x10 , 0x108 , 0x38 });
 				}
 				if (ImGui::IsItemHovered(ImGuiHoveredFlags_AllowWhenDisabled)) {
 					ImGui::SetTooltip("This will set the deposit amount to how much cash you have.");
 				}
 			}
+
+			// tab 2
 			if (globals::whichTab == 1) {
 				if (ImGui::Button("Unhook")) {
 					kiero::shutdown();
