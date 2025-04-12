@@ -1,4 +1,4 @@
-# Basic-Schedule-1-Menu
+# Basic Schedule 1 Menu
 Offsets done by me and I made all the menu things.
 
 Made using the Universal ImGui Kiero Hook
